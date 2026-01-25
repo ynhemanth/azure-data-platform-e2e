@@ -1,0 +1,9 @@
+{
+	"name": "pl_gen1_to_gen2_migration",
+	"properties": {
+		"folder": {
+			"name": "migrateGen1toGen2"
+		},
+		"annotations": []
+	}
+}

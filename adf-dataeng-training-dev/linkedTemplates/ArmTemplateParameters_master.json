@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-dataeng-training-dev"
+		},
+		"ls_Adf_to_ADLS_Gen2_accountKey": {
+			"value": ""
+		},
+		"ls_onprem_filesystem_password": {
+			"value": ""
+		},
+		"ls_Adf_to_ADLS_Gen2_properties_typeProperties_url": {
+			"value": "https://stadlsgen2dataenggdev2.dfs.core.windows.net/"
+		},
+		"ls_DataEngg_keyVault_properties_typeProperties_baseUrl": {
+			"value": "https://kvdataenggsecrets.vault.azure.net/"
+		},
+		"ls_onprem_filesystem_properties_typeProperties_host": {
+			"value": "C:\\projects\\files"
+		},
+		"ls_onprem_filesystem_properties_typeProperties_userId": {
+			"value": "ynhemanth@hotmail.com"
+		},
+		"ls_onprem_sqlserver_properties_typeProperties_server": {
+			"value": "HEMANTHPC\\SQLEXPRESS"
+		},
+		"ls_onprem_sqlserver_properties_typeProperties_database": {
+			"value": "mbdbx101"
+		},
+		"ls_onprem_sqlserver_properties_typeProperties_userName": {
+			"value": "ynhemanth"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

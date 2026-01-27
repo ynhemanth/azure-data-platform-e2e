@@ -1,0 +1,21 @@
+{
+	"name": "ds_ADF_csv_to_gen2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Adf_to_ADLS_Gen2",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "onPremCSV"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CSV",
+				"fileSystem": "raw"
+			}
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "ds_onPremCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onprem_filesystem",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "onPremCSV"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "locations.csv"
+			}
+		}
+	}
+}

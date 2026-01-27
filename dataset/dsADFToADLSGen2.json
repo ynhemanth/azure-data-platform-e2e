@@ -1,0 +1,25 @@
+{
+	"name": "dsADFToADLSGen2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_Adf_to_ADLS_Gen2",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "onPremSql"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

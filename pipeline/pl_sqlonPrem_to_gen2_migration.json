@@ -1,0 +1,9 @@
+{
+	"name": "pl_sqlonPrem_to_gen2_migration",
+	"properties": {
+		"folder": {
+			"name": "migratesqltogen2"
+		},
+		"annotations": []
+	}
+}

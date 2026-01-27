@@ -4,10 +4,10 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"server": ".\\SQLEXPRESS",
+			"server": "HEMANTHPC\\SQLEXPRESS",
 			"database": "mbdbx101",
 			"encrypt": "mandatory",
-			"trustServerCertificate": false,
+			"trustServerCertificate": true,
 			"authenticationType": "SQL",
 			"userName": "ynhemanth",
 			"password": {
@@ -18,6 +18,10 @@
 				},
 				"secretName": "HemanthPCSQLServer"
 			}
+		},
+		"connectVia": {
+			"referenceName": "IRselfhosted",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

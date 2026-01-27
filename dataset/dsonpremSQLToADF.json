@@ -1,0 +1,173 @@
+{
+	"name": "dsonpremSQLToADF",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onprem_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "onPremSql"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "AdminID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Login",
+				"type": "varchar"
+			},
+			{
+				"name": "Password",
+				"type": "varchar"
+			},
+			{
+				"name": "CentreID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CentreAdmin",
+				"type": "bit"
+			},
+			{
+				"name": "ConfigAdmin",
+				"type": "bit"
+			},
+			{
+				"name": "SummaryReports",
+				"type": "bit"
+			},
+			{
+				"name": "UserAdmin",
+				"type": "bit"
+			},
+			{
+				"name": "Forename",
+				"type": "varchar"
+			},
+			{
+				"name": "Surname",
+				"type": "varchar"
+			},
+			{
+				"name": "Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IsCentreManager",
+				"type": "bit"
+			},
+			{
+				"name": "Approved",
+				"type": "bit"
+			},
+			{
+				"name": "PasswordReminder",
+				"type": "bit"
+			},
+			{
+				"name": "EITSProfile",
+				"type": "varchar"
+			},
+			{
+				"name": "PasswordReminderHash",
+				"type": "varchar"
+			},
+			{
+				"name": "PasswordReminderDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Active",
+				"type": "bit"
+			},
+			{
+				"name": "ContentManager",
+				"type": "bit"
+			},
+			{
+				"name": "PublishToAll",
+				"type": "bit"
+			},
+			{
+				"name": "ImportOnly",
+				"type": "bit"
+			},
+			{
+				"name": "TCAgreed",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ContentCreator",
+				"type": "bit"
+			},
+			{
+				"name": "FailedLoginCount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProfileImage",
+				"type": "image"
+			},
+			{
+				"name": "Supervisor",
+				"type": "bit"
+			},
+			{
+				"name": "Trainer",
+				"type": "bit"
+			},
+			{
+				"name": "CategoryID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SkypeHandle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PublicSkypeLink",
+				"type": "bit"
+			},
+			{
+				"name": "IsFrameworkDeveloper",
+				"type": "bit"
+			},
+			{
+				"name": "ResetPasswordID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IsFrameworkContributor",
+				"type": "bit"
+			},
+			{
+				"name": "IsWorkforceManager",
+				"type": "bit"
+			},
+			{
+				"name": "IsWorkforceContributor",
+				"type": "bit"
+			},
+			{
+				"name": "IsLocalWorkforceManager",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AdminUsers"
+		}
+	}
+}

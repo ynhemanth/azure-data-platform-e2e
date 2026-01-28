@@ -16,6 +16,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"url": "https://dummyjson.com/auth/login",
 					"body": {
 						"username": "emilys",

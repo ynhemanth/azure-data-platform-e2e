@@ -13,6 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "productsList.json",
 				"folderPath": "API/Products",
 				"fileSystem": "raw"
 			}

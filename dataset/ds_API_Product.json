@@ -10,6 +10,9 @@
 		},
 		"annotations": [],
 		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/auth/products"
+		},
 		"schema": []
 	}
 }

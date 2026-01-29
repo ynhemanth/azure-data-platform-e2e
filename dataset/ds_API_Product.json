@@ -1,0 +1,15 @@
+{
+	"name": "ds_API_Product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_BaseProductURL",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "API"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

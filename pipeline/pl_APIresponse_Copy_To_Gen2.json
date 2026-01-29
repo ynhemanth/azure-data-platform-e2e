@@ -1,0 +1,68 @@
+{
+	"name": "pl_APIresponse_Copy_To_Gen2",
+	"properties": {
+		"activities": [
+			{
+				"name": "APIAccessTokenFetch",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://dummyjson.com/auth/login",
+					"body": {
+						"username": "emilys",
+						"password": "emilyspass",
+						"expiresInMins": 30
+					},
+					"authentication": {
+						"type": "Basic",
+						"username": "emilys",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "ls_DataEngg_keyVault",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "APIKeyPass"
+						}
+					}
+				}
+			},
+			{
+				"name": "APIProductsResponseCopy",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "APIAccessTokenFetch",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			}
+		],
+		"folder": {
+			"name": "migrateAPItogen2"
+		},
+		"annotations": []
+	}
+}

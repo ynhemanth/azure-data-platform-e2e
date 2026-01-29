@@ -49,6 +49,73 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_onPremCSV_To_gen2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "pl_onPremCSV_To_gen2_migration",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_onPremCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_ADF_csv_to_gen2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "migrateCSVtogen2"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_onPremCSV')]",
+				"[concat(variables('factoryId'), '/datasets/ds_ADF_csv_to_gen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_sqlonPrem_to_gen2_migration')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -588,6 +655,57 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_ADF_csv_to_gen2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_Adf_to_ADLS_Gen2",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "onPremCSV"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "CSV",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_Adf_to_ADLS_Gen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_onPremCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_onprem_filesystem",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "onPremCSV"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "locations.csv"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_onprem_filesystem')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dsonpremSQLToADF')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -863,14 +981,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_onPremCSV_To_gen2')]",
+			"name": "[concat(parameters('factoryName'), '/pl_API_to_gen2')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "pl_onPremCSV_To_gen2_migration",
-						"type": "Copy",
+						"name": "APIWebAccess",
+						"type": "WebActivity",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -881,103 +999,71 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
 							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
-								}
+							"url": "https://dummyjson.com/auth/login",
+							"body": {
+								"username": "emilys",
+								"password": "emilyspass",
+								"expiresInMins": 120
 							},
-							"enableStaging": false
-						},
-						"inputs": [
+							"authentication": {
+								"type": "Basic",
+								"username": "maheer123@gmail.com",
+								"password": {
+									"type": "AzureKeyVaultSecret",
+									"store": {
+										"referenceName": "ls_DataEngg_keyVault",
+										"type": "LinkedServiceReference"
+									},
+									"secretName": "APIKeyPass"
+								}
+							}
+						}
+					},
+					{
+						"name": "APITokenPassToCopy",
+						"type": "WebActivity",
+						"dependsOn": [
 							{
-								"referenceName": "ds_onPremCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"activity": "APIWebAccess",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
-						"outputs": [
-							{
-								"referenceName": "ds_ADF_csv_to_gen2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {
+								"Authorization": {
+									"value": "Bearer @{activity('APIWebAccess').output.accessToken}",
+									"type": "Expression"
+								}
+							},
+							"url": "https://dummyjson.com/auth/products"
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
 				"folder": {
-					"name": "migrateCSVtogen2"
+					"name": "migrateAPItogen2"
 				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_onPremCSV')]",
-				"[concat(variables('factoryId'), '/datasets/ds_ADF_csv_to_gen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_onPremCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_onprem_filesystem",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "onPremCSV"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "locations.csv"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_onprem_filesystem')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_ADF_csv_to_gen2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_Adf_to_ADLS_Gen2",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "onPremCSV"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "CSV",
-						"fileSystem": "raw"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_Adf_to_ADLS_Gen2')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_DataEngg_keyVault')]"
 			]
 		}
 	]

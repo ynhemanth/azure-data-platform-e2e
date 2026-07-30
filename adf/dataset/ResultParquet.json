@@ -1,0 +1,19 @@
+{
+	"name": "ResultParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ResultData_ADLStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "layer1"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

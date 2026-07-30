@@ -1,0 +1,15 @@
+{
+	"name": "adf-tut-dev-uksouth",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "56830bae-69d3-4622-b524-ceaf92ed7cc6",
+		"tenantId": "276dc064-02a8-4472-b7e5-d52e55c32b92"
+	}
+}

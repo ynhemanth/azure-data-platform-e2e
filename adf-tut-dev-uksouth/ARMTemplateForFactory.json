@@ -71,7 +71,7 @@
 						}
 					},
 					{
-						"name": "ForEach1",
+						"name": "CopyDataForEach",
 						"type": "ForEach",
 						"dependsOn": [
 							{

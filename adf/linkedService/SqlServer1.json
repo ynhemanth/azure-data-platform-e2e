@@ -1,0 +1,21 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "HEMANTHPC\\SQLEXPRESS",
+			"database": "mbdbx101",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "ynhemanth",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3ZmRkMTI1NC05YTA4LTRhNTEtOWNjNy0wMmNjZGZhOGQxZDMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IRADfTutADfUKsouth",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

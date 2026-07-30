@@ -1,0 +1,51 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TypeLabel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TypeCaption",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Active",
+				"type": "bit"
+			},
+			{
+				"name": "ColourString",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IconClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BtnColourClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SchedulerOrderNum",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ActivityTypes"
+		}
+	}
+}

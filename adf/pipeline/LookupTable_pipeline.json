@@ -28,6 +28,19 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "ForEach_lookupTables",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get_all_lookup_tables",
+						"dependencyConditions": [
+							"Skipped"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
 		"annotations": []

@@ -86,11 +86,11 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@concat(dataset().TableName,'.parquet')",
+							"value": "@concat(dataset().TableName, '.parquet')",
 							"type": "Expression"
 						},
 						"folderPath": {
-							"value": "@concat(dataset().SchemaName,'/',dataset().TableName)",
+							"value": "@concat(dataset().SchemaName, '/', dataset().TableName)",
 							"type": "Expression"
 						},
 						"fileSystem": "layer1"
@@ -278,13 +278,13 @@
 						}
 					},
 					{
-						"name": "CopyDataForEach",
+						"name": "ForEach_lookupTables",
 						"type": "ForEach",
 						"dependsOn": [
 							{
 								"activity": "Get_all_lookup_tables",
 								"dependencyConditions": [
-									"Succeeded"
+									"Skipped"
 								]
 							}
 						],
@@ -296,7 +296,7 @@
 							},
 							"activities": [
 								{
-									"name": "ForeachDataCopy",
+									"name": "Copy data1",
 									"type": "Copy",
 									"dependsOn": [],
 									"policy": {
@@ -311,7 +311,7 @@
 										"source": {
 											"type": "SqlServerSource",
 											"sqlReaderQuery": {
-												"value": "@concat('select * from', item().SchemaName,'.',item().TableName)",
+												"value": "@concat('select * from ', item().SchemaName, '.', item().TableName)",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -338,7 +338,7 @@
 									},
 									"inputs": [
 										{
-											"referenceName": "LookupSqlData",
+											"referenceName": "SqlServerTable1",
 											"type": "DatasetReference",
 											"parameters": {}
 										}
@@ -371,7 +371,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
-				"[concat(variables('factoryId'), '/datasets/LookupSqlData')]",
 				"[concat(variables('factoryId'), '/datasets/ResultParquet')]"
 			]
 		}

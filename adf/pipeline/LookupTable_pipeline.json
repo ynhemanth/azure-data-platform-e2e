@@ -40,7 +40,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get_all_lookup_tables').output.value",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
